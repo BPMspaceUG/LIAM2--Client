@@ -152,7 +152,7 @@ if (isset($_POST['liam2_login'])) {
     }
 }
 if (isset($_SESSION['user_id'])) {
-    header("Location: account.php");
+    header("Location: index.php");
     exit();
 } else {
     require_once(__DIR__ . '/templates/login.php');
