@@ -6,4 +6,4 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css"/>
 <?php
 session_start();
-require_once(__DIR__ . '/inc/api.inc.php');
+require_once(__DIR__ . '/api.inc.php');

@@ -3,7 +3,7 @@
 /**
  * Delete images older than 30 minutes
  */
-foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/captcha/*.png") as $filename) {
+foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/inc/captcha/*.png") as $filename) {
     if (time()- filectime($filename) > 1800) {
         if (file_exists($filename)) unlink($filename);
     }
@@ -23,7 +23,7 @@ function generateImage($text, $file) {
     imagepng($im, $file);
     imagedestroy($im);
 }
-$captchaImage = 'captcha/captcha'.time().'.png';
+$captchaImage = 'inc/captcha/captcha'.time().'.png';
 //generateImage($expression->n1.' + '.$expression->n2.' =', $captchaImage);
 // masking with alphabets
 $alphabet = array('K', 'g', 'A', 'D', 'R', 'V', 's', 'L', 'Q', 'w');

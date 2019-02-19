@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/header.php');
+require_once(__DIR__ . '/inc/header.inc.php');
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -12,5 +12,5 @@ if (!isset($_SESSION['user_id'])) {
         ))
     )), true);
     $username = $user[0]['liam2_User_firstname'] . ' ' . $user[0]['liam2_User_lastname'];
-    require_once(__DIR__ . '/templates/main.php');
+    require_once(__DIR__ . '/inc/templates/main.inc.php');
 }

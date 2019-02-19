@@ -4,7 +4,7 @@ $(document).ready( function () {
         keyboard: false
     });
 
-    $('#delete_email_dropdown').change(function() {
-        $('#delete_user_email_id').val($(this).find('option:selected').data('user_email_id'));
+    $('#liam2_add_another_email').click(function(){
+        $('#liam2_add_another_email_form').submit();
     })
 });
