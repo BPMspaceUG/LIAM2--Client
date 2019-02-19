@@ -1,3 +1,4 @@
 *.secret.*
 .idea*
-/captcha/*.png
+/inc/captcha/*.png
+/inc/api.inc.php
