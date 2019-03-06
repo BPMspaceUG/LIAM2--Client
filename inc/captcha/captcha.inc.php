@@ -3,7 +3,7 @@
 /**
  * Delete images older than 30 minutes
  */
-foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/inc/captcha/*.png") as $filename) {
+foreach (glob(__DIR__ . "/*.png") as $filename) {
     if (time()- filectime($filename) > 1800) {
         if (file_exists($filename)) unlink($filename);
     }
