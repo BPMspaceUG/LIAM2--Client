@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/inc/header.inc.php');
-require_once(__DIR__ . '/inc/captcha/captcha.inc.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/header.inc.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/captcha/captcha.inc.php');
 generateImage($expression->n1.' + '.$expression->n2.' =', $captchaImage);
 if (isset($_POST['liam2_login'])) {
     if (file_exists($_POST['captcha-image'])) unlink($_POST['captcha-image']);
@@ -155,5 +155,5 @@ if (isset($_SESSION['user_id'])) {
     header("Location: /");
     exit();
 } else {
-    require_once(__DIR__ . '/inc/templates/login.inc.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/templates/login.inc.php');
 }
