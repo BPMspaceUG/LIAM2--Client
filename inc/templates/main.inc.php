@@ -9,9 +9,9 @@
                                 <i class="far fa-user fa-2x"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/change_password.php">Change password</a>
-                                <a class="dropdown-item" href="/manage_emails.php">Manage E-Mails</a>
-                                <a class="dropdown-item" href="/logout.php">Logout</a>
+                                <a class="dropdown-item" href="change_password.php">Change password</a>
+                                <a class="dropdown-item" href="manage_emails.php">Manage E-Mails</a>
+                                <a class="dropdown-item" href="logout.php">Logout</a>
                             </div>
                         </li>
                     </ul>

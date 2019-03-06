@@ -18,7 +18,7 @@
                     <input type="hidden" name="code" value="<?php echo $code; ?>" />
                     <input type="hidden" name="captcha-image" value="<?php echo $captchaImage; ?>" />
                     <label for="result" class="col-lg-4">Captcha *</label>
-                    <img src="<?php echo '/' . $captchaImage; ?>" class="captcha-image col-lg-4 col-sm-4" />
+                    <img src="<?php echo $captchaImage; ?>" class="captcha-image col-lg-4 col-sm-4" />
                     <input type="text" name="result" class="form-control col-lg-4 col-sm-8" required />
                 </div>
                 <a class="form-submit btn btn-primary" href="forgot_password.php">Forgot password</a>
