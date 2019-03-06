@@ -5,6 +5,6 @@
    4. Git client installed on machine
 2. TODO
    1. "git clone https://github.com/BPMspaceUG/LIAM2-Client.git"
-   2. In /inc/api.inc.php add:
+   2. copy /inc/api.EXAMPLE_secret.inc.php to /inc/api.secret.inc.php and set: 
         1. $headers[] = 'Cookie: token=[ENTER TOKEN HERE]';
         2. $url = "[ENTER URL HERE]";
