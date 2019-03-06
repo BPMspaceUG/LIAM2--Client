@@ -1,9 +1,9 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/header.inc.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/php-jwt-master/src/BeforeValidException.inc.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/php-jwt-master/src/ExpiredException.inc.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/php-jwt-master/src/SignatureInvalidException.inc.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/php-jwt-master/src/JWT.inc.php');
+require_once(__DIR__ . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/BeforeValidException.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/ExpiredException.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/SignatureInvalidException.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
 $show_form = true;
 if (!isset($_GET['token'])) {
@@ -54,4 +54,4 @@ if (!isset($_GET['token'])) {
         }
     }
 }
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/templates/reset_password.inc.php');
+require_once(__DIR__ . '/inc/templates/reset_password.inc.php');

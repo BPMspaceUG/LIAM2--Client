@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/header.inc.php');
 if (!isset($_GET['email_id'])) {
     $error = 'No email id.';
 } else {
@@ -28,4 +28,4 @@ if (!isset($_GET['email_id'])) {
         }
     }
 }
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/templates/verify.inc.php');
+require_once(__DIR__ . '/inc/templates/verify.inc.php');

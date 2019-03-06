@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/header.inc.php');
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -163,5 +163,5 @@ if (!isset($_SESSION['user_id'])) {
             array_push($unselected_user_emails, $user_email);
         }
     }
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/templates/manage_emails.inc.php');
+    require_once(__DIR__ . '/inc/templates/manage_emails.inc.php');
 }
