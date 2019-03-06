@@ -6,5 +6,5 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css"/>
 <?php
 session_start();
-require_once(__DIV__ . '/api.secret.inc.php');
-require_once(__DIV__ . '/api.inc.php');
+require_once(__DIR__ . '/api.secret.inc.php');
+require_once(__DIR__ . '/api.inc.php');
