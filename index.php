@@ -1,4 +1,3 @@
-bbb
 <?php
 require_once(__DIR__ . '/inc/header.inc.php');
 if (!isset($_SESSION['user_id'])) {
