@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 $show_form = false;
 if (!isset($_GET['email_id'])) {
     $error = 'No email id.';
@@ -53,4 +53,4 @@ if (!isset($_GET['email_id'])) {
         }
     }
 }
-require_once(__DIR__ . '/inc/templates/register.inc.php');
+require_once(__DIR__ . '/inc/templates/LIAM2_Client_register.inc.php');

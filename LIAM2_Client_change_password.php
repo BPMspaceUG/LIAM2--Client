@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: LIAM2_Client_login.php");
     exit();
 } else {
     if (isset($_POST['liam2_change_password'])) {
@@ -35,5 +35,5 @@ if (!isset($_SESSION['user_id'])) {
             $error = $result[0]['message'];
         }
     }
-    require_once(__DIR__ . '/inc/templates/change_password.inc.php');
+    require_once(__DIR__ . '/inc/templates/LIAM2_Client_change_password.inc.php');
 }

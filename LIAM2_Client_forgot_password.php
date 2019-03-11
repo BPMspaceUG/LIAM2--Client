@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
 
@@ -63,4 +63,4 @@ if (isset($_POST['forgot_password'])) {
         //var_dump($jwt);
     }
 }
-require_once(__DIR__ . '/inc/templates/forgot_password.inc.php');
+require_once(__DIR__ . '/inc/templates/LIAM2_Client_forgot_password.inc.php');

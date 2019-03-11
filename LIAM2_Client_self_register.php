@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/captcha/captcha.inc.php');
 if (isset($_POST['self_register'])) {
     if (file_exists($_POST['captcha-image'])) unlink($_POST['captcha-image']);
@@ -27,4 +27,4 @@ if (isset($_POST['self_register'])) {
     }
 }
 generateImage($expression->n1.' + '.$expression->n2.' =', $captchaImage);
-require_once(__DIR__ . '/inc/templates/self_register.inc.php');
+require_once(__DIR__ . '/inc/templates/LIAM2_Client_self_register.inc.php');

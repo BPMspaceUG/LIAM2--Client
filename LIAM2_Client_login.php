@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/captcha/captcha.inc.php');
 generateImage($expression->n1.' + '.$expression->n2.' =', $captchaImage);
 if (isset($_POST['liam2_login'])) {
@@ -155,5 +155,5 @@ if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 } else {
-    require_once(__DIR__ . '/inc/templates/login.inc.php');
+    require_once(__DIR__ . '/inc/templates/LIAM2_Client_login.inc.php');
 }

@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '/inc/header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: LIAM2_Client_login.php");
     exit();
 } else {
     if (isset($_POST['liam2_add_another_email'])) {
@@ -163,5 +163,5 @@ if (!isset($_SESSION['user_id'])) {
             array_push($unselected_user_emails, $user_email);
         }
     }
-    require_once(__DIR__ . '/inc/templates/manage_emails.inc.php');
+    require_once(__DIR__ . '/inc/templates/LIAM2_Client_manage_emails.inc.php');
 }
