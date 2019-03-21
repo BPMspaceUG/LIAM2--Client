@@ -27,8 +27,8 @@ if (isset($_POST['forgot_password'])) {
         }
     }
     if (!isset($error)) {
-        $key = "liam2_key";
-        $token = array(
+        $jwt_key = "liam2_key";
+        $jwt_token = array(
             "iss" => "liam2",
             "aud" => $user_email[0]['liam2_User_id_fk_164887']['liam2_User_id'],
             "iat" => time(),
@@ -41,7 +41,7 @@ if (isset($_POST['forgot_password'])) {
          * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
          * for a list of spec-compliant algorithms.
          */
-        $jwt = JWT::encode($token, $key);
+        $jwt = JWT::encode($jwt_token, $jwt_key);
 
         $result = api(json_encode(array(
             "cmd" => "makeTransition",
