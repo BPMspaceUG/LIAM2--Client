@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_translate.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
 
@@ -50,7 +51,6 @@ if (isset($_POST['forgot_password'])) {
                 "row" => array(
                     "liam2_User_id" => $user_email[0]['liam2_User_id_fk_164887']['liam2_User_id'],
                     "liam2_client_passwd_reset" => true,
-                    "jwt" => $jwt,
                     "liam2_User_email" => $email_input,
                     "state_id" => 9
                 )
@@ -58,9 +58,19 @@ if (isset($_POST['forgot_password'])) {
         )));
         $result = json_decode($result, true);
         if ($result > 2) {
-            $success = $result[2]['message'];
+            // Mail Content
+            $subject = "Password Reset";
+            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_reset_password.php?token=" . $jwt;
+            $msg = translate('LIAM2 CLIENT password reset email', 'en');
+            $msg = str_replace('$link', $link, $msg);
+            // Format and Send Mail
+            $msg = wordwrap($msg, 70);
+            if (mail($email_input, $subject, $msg)) {
+                $success = 'Password reset link sent to email.';
+            } else {
+                $error = "The email can't be send";
+            }
         }
-        //var_dump($jwt);
     }
 }
 require_once(__DIR__ . '/inc/templates/LIAM2_Client_forgot_password.inc.php');

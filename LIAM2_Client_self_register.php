@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/captcha/captcha.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_translate.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
 if (isset($_POST['self_register'])) {
@@ -43,9 +44,11 @@ if (isset($_POST['self_register'])) {
             // Mail Content
             $subject = "Please confirm your Mail Adress";
             $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_register.php?token=" . $jwt;
-            $msg = "Hello, First line of text\nSecond line of text <a href='" . $link . "'>Click here to confirm your email</a>";
+            $msg = translate('LIAM2 CLIENT Self registration email', 'en');
+            $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
             $msg = wordwrap($msg, 70);
+            var_dump($msg);
             if (mail($email, $subject, $msg)) {
                 $success = 'A verification link has been sent to your email address.';
             } else {

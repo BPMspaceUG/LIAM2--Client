@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_translate.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
 if (!isset($_SESSION['user_id'])) {
@@ -39,8 +40,9 @@ if (!isset($_SESSION['user_id'])) {
             $jwt = JWT::encode($jwt_token, $jwt_key);
 
             $subject = "Verification";
-            $link = "//" . $_SERVER['SERVER_NAME'] . "LIAM2_Client_verify.php?token=" . $jwt;
-            $msg = "Please verify your mail - <a href='" . $link . "'>Click here to verify your email</a>";
+            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_verify.php?token=" . $jwt;
+            $msg = translate('LIAM2 CLIENT verify email', 'en');
+            $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
             $msg = wordwrap($msg, 70);
             if (mail($email, $subject, $msg)) {
@@ -80,6 +82,15 @@ if (!isset($_SESSION['user_id'])) {
         )));
         $result = json_decode($result, true);
         if (count($result) > 2) {
+            $result2 = api(json_encode(array(
+                "cmd" => "read",
+                "paramJS" => array(
+                    "table" => "liam2_email",
+                    "where" => "liam2_email_id = $email_id"
+                )
+            )));
+            $result2 = json_decode($result2, true);
+            $email = $result2[0]['liam2_email_text'];
             $jwt_key = "liam2_key";
             $jwt_token = array(
                 "iss" => "liam2",
@@ -97,8 +108,9 @@ if (!isset($_SESSION['user_id'])) {
             $jwt = JWT::encode($jwt_token, $jwt_key);
 
             $subject = "Verification";
-            $link = "//" . $_SERVER['SERVER_NAME'] . "LIAM2_Client_verify.php?token=" . $jwt;
-            $msg = "Please verify your mail - <a href='" . $link . "'>Click here to verify your email</a>";
+            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_verify.php?token=" . $jwt;
+            $msg = translate('LIAM2 CLIENT verify email', 'en');
+            $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
             $msg = wordwrap($msg, 70);
             if (mail($email, $subject, $msg)) {
