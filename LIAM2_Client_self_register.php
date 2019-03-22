@@ -48,7 +48,6 @@ if (isset($_POST['self_register'])) {
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
             $msg = wordwrap($msg, 70);
-            var_dump($msg);
             if (mail($email, $subject, $msg)) {
                 $success = 'A verification link has been sent to your email address.';
             } else {
