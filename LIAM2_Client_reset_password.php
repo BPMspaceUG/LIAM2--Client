@@ -11,7 +11,7 @@ if (!isset($_GET['token'])) {
     $show_form = false;
 } else {
     $jwt = $_GET['token'];
-    $key = "liam2_key";
+    $jwt_key = "liam2_key";
 
     /**
      * You can add a leeway to account for when there is a clock skew times between
@@ -22,7 +22,7 @@ if (!isset($_GET['token'])) {
      */
     JWT::$leeway = 60; // $leeway in seconds
     try {
-        $decoded = JWT::decode($jwt, $key, array('HS256'));
+        $decoded = JWT::decode($jwt, $jwt_key, array('HS256'));
     } catch (Exception $e) {
         $error = $e->getMessage();
     }

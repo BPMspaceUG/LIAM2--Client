@@ -1,16 +1,19 @@
 <?php
 require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
+use \Firebase\JWT\JWT;
 if (!isset($_SESSION['user_id'])) {
     header("Location: /LIAM2_Client_login.php");
     exit();
 } else {
     if (isset($_POST['liam2_add_another_email'])) {
+        $email = htmlspecialchars($_POST['liam2_add_another_email']);
         $result = api(json_encode(array(
                 "cmd" => "create",
                 "paramJS" => array(
                     "table" => "liam2_email",
                     "row" => array(
-                        "liam2_email_text" => htmlspecialchars($_POST['liam2_add_another_email']),
+                        "liam2_email_text" => $email,
                         "only_verify_mail" => true
                     )
                 )
@@ -18,7 +21,33 @@ if (!isset($_SESSION['user_id'])) {
         ));
         $result = json_decode($result, true);
         if (count($result) > 1) {
-            $success = 'A verification link has been sent to your email address.';
+            $email_id = $result[1]['element_id'];
+            $jwt_key = "liam2_key";
+            $jwt_token = array(
+                "iss" => "liam2",
+                "aud" => $email_id,
+                "iat" => time(),
+                "exp" => time() + 10800
+            );
+
+            /**
+             * IMPORTANT:
+             * You must specify supported algorithms for your application. See
+             * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
+             * for a list of spec-compliant algorithms.
+             */
+            $jwt = JWT::encode($jwt_token, $jwt_key);
+
+            $subject = "Verification";
+            $link = "//" . $_SERVER['SERVER_NAME'] . "LIAM2_Client_verify.php?token=" . $jwt;
+            $msg = "Please verify your mail - <a href='" . $link . "'>Click here to verify your email</a>";
+            // Format and Send Mail
+            $msg = wordwrap($msg, 70);
+            if (mail($email, $subject, $msg)) {
+                $success = 'A verification link has been sent to your email address.';
+            } else {
+                $error = "The email can't be send";
+            }
         } else {
             $error = $result[0]['message'];
         }
@@ -51,7 +80,32 @@ if (!isset($_SESSION['user_id'])) {
         )));
         $result = json_decode($result, true);
         if (count($result) > 2) {
-            $success = "A verification link has been sent to your email address.";
+            $jwt_key = "liam2_key";
+            $jwt_token = array(
+                "iss" => "liam2",
+                "aud" => $email_id,
+                "iat" => time(),
+                "exp" => time() + 10800
+            );
+
+            /**
+             * IMPORTANT:
+             * You must specify supported algorithms for your application. See
+             * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
+             * for a list of spec-compliant algorithms.
+             */
+            $jwt = JWT::encode($jwt_token, $jwt_key);
+
+            $subject = "Verification";
+            $link = "//" . $_SERVER['SERVER_NAME'] . "LIAM2_Client_verify.php?token=" . $jwt;
+            $msg = "Please verify your mail - <a href='" . $link . "'>Click here to verify your email</a>";
+            // Format and Send Mail
+            $msg = wordwrap($msg, 70);
+            if (mail($email, $subject, $msg)) {
+                $success = 'A verification link has been sent to your email address.';
+            } else {
+                $error = "The email can't be send";
+            }
         } else {
             $error = $result[0]['message'];
         }

@@ -1,10 +1,31 @@
 <?php
 require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/BeforeValidException.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/ExpiredException.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/SignatureInvalidException.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
+use \Firebase\JWT\JWT;
 $show_form = false;
-if (!isset($_GET['email_id'])) {
-    $error = 'No email id.';
+if (!isset($_GET['token'])) {
+    $error = 'No token.';
 } else {
-    $email_id = $_GET['email_id'];
+    $jwt = $_GET['token'];
+    $jwt_key = "liam2_key";
+
+    /**
+     * You can add a leeway to account for when there is a clock skew times between
+     * the signing and verifying servers. It is recommended that this leeway should
+     * not be bigger than a few minutes.
+     *
+     * Source: http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html#nbfDef
+     */
+    JWT::$leeway = 60; // $leeway in seconds
+    try {
+        $decoded = JWT::decode($jwt, $jwt_key, array('HS256'));
+        $email_id = $decoded->aud;
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+    }
     if (isset($_POST['register'])) {
         $password = trim(htmlspecialchars($_POST['password']));
         $result = api(json_encode(array(
@@ -25,8 +46,8 @@ if (!isset($_GET['email_id'])) {
             $success = 'Success.';
         } else {
             $error = $result[0]['message'];
-            $show_form = true; ?>
-        <?php }
+            $show_form = true;
+        }
     } else {
         $result = api(json_encode(array(
                 "cmd" => "makeTransition",
