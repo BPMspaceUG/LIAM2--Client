@@ -17,7 +17,12 @@
                     </ul>
                 </div>
             </nav>
-            <h2>Welcome <?php echo $username; ?></h2>
+            <?php
+				$origin = $_GET['origin'];
+				header("Location: ".$origin);
+			?>
+			<h2>Welcome <?php echo $username; ?></h2>
+			
         </div>
     </div>
 </div>
