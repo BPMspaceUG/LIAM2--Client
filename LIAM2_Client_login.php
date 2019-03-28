@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/captcha/captcha.inc.php');
+require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
+use \Firebase\JWT\JWT;
 generateImage($expression->n1.' + '.$expression->n2.' =', $captchaImage);
 if (isset($_POST['liam2_login'])) {
     if (file_exists($_POST['captcha-image'])) unlink($_POST['captcha-image']);
@@ -146,6 +148,20 @@ if (isset($_POST['liam2_login'])) {
                             )
                         )
                     ));
+
+                    if (isset($_GET['origin'])) {
+                        $origin = $_GET['origin'];
+                        $jwt_key = "liam2_key";
+                        $jwt_token = array(
+                            "iss" => "liam2",
+                            "uid" => $user_id,
+                            "iat" => time(),
+                            "exp" => time() + 86400
+                        );
+                        $token = JWT::encode($jwt_token, $jwt_key);
+                        header("Location: " . $origin . "?token=" . $token);
+                        exit();
+                    }
                 }
             }
         }
