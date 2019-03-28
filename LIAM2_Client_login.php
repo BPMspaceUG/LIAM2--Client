@@ -151,14 +151,13 @@ if (isset($_POST['liam2_login'])) {
 
                     if (isset($_GET['origin'])) {
                         $origin = $_GET['origin'];
-                        $jwt_key = "liam2_key";
                         $jwt_token = array(
                             "iss" => "liam2",
                             "uid" => $user_id,
                             "iat" => time(),
                             "exp" => time() + 86400
                         );
-                        $token = JWT::encode($jwt_token, $jwt_key);
+                        $token = JWT::encode($jwt_token, AUTH_KEY);
                         header("Location: " . $origin . "?token=" . $token);
                         exit();
                     }
