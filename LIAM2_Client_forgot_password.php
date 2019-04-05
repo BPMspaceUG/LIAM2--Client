@@ -28,7 +28,7 @@ if (isset($_POST['forgot_password'])) {
         }
     }
     if (!isset($error)) {
-        $jwt_key = "liam2_key";
+        $jwt_key = AUTH_KEY;
         $jwt_token = array(
             "iss" => "liam2",
             "aud" => $user_email[0]['liam2_User_id_fk_164887']['liam2_User_id'],

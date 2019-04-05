@@ -25,7 +25,7 @@ if (isset($_POST['self_register'])) {
         $result = json_decode($result, true);
         if (count($result) > 1) {
             $email_id = $result[1]['element_id'];
-            $jwt_key = "liam2_key";
+            $jwt_key = AUTH_KEY;
             $jwt_token = array(
                 "iss" => "liam2",
                 "aud" => $email_id,

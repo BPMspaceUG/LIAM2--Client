@@ -23,7 +23,7 @@ if (!isset($_SESSION['user_id'])) {
         $result = json_decode($result, true);
         if (count($result) > 1) {
             $email_id = $result[1]['element_id'];
-            $jwt_key = "liam2_key";
+            $jwt_key = AUTH_KEY;
             $jwt_token = array(
                 "iss" => "liam2",
                 "aud" => $email_id,
@@ -91,7 +91,7 @@ if (!isset($_SESSION['user_id'])) {
             )));
             $result2 = json_decode($result2, true);
             $email = $result2[0]['liam2_email_text'];
-            $jwt_key = "liam2_key";
+            $jwt_key = AUTH_KEY;
             $jwt_token = array(
                 "iss" => "liam2",
                 "aud" => $email_id,

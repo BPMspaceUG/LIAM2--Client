@@ -8,4 +8,5 @@
    2. copy /inc/api.EXAMPLE_secret.inc.php to /inc/api.secret.inc.php and set: 
         1. $headers[] = 'Cookie: token=[ENTER TOKEN HERE]';
         2. $url = "[ENTER URL HERE]";
+        3. define('AUTH_KEY', 'liam2_key');
      

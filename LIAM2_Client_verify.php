@@ -9,7 +9,7 @@ if (!isset($_GET['token'])) {
     $error = 'No token.';
 } else {
     $jwt = $_GET['token'];
-    $jwt_key = "liam2_key";
+    $jwt_key = AUTH_KEY;
 
     /**
      * You can add a leeway to account for when there is a clock skew times between
