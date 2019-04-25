@@ -65,11 +65,13 @@ if (isset($_POST['forgot_password'])) {
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
             $msg = wordwrap($msg, 70);
-            if (mail($email_input, $subject, $msg)) {
+            mail($email_input, $subject, $msg);
+            $success = 'Password reset link sent to email.';
+            /*if (mail($email_input, $subject, $msg)) {
                 $success = 'Password reset link sent to email.';
             } else {
                 $error = "The email can't be send";
-            }
+            }*/
         }
     }
 }

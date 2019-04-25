@@ -44,11 +44,40 @@ if (!isset($_GET['token'])) {
         $result = json_decode($result, true);
         if (count($result) > 1) {
             $success = 'Success.';
+
+            $result = api(json_encode(array(
+                    "cmd" => "makeTransition",
+                    "paramJS" => array(
+                        "table" => "liam2_email",
+                        "row" => array(
+                            "liam2_email_id" => $email_id,
+                            "state_id" => 14
+                        )
+                    )
+                )
+            ));
+            try {
+                $result = json_decode($result, true);
+            } catch (Exception $e) {
+                $error = $e->getMessage();
+            }
+            if (!isset($error)) {
+                if ($result && count($result) > 2) {
+                    $show_form = true;
+                    if (isset($_GET['origin'])) {
+                        header('Location: http:' . $_GET['origin']);
+                        exit();
+                    }
+                } else {
+                    $error = 'This email is already verified or blocked.';
+                }
+            }
+
         } else {
             $error = $result[0]['message'];
             $show_form = true;
         }
-    } else {
+    /*} else {
         $result = api(json_encode(array(
                 "cmd" => "makeTransition",
                 "paramJS" => array(
@@ -71,7 +100,8 @@ if (!isset($_GET['token'])) {
             } else {
                 $error = 'This email is already verified or blocked.';
             }
-        }
+        }*/
     }
+    if (isset($_GET['firstname']) || isset($_GET['lastname'])) $show_form = true;
 }
 require_once(__DIR__ . '/inc/templates/LIAM2_Client_register.inc.php');

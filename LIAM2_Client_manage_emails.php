@@ -3,12 +3,13 @@ require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/LIAM2_Client_translate.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) && !isset($_GET['liam2_add_another_email'])) {
     header("Location: LIAM2_Client_login.php");
     exit();
 } else {
-    if (isset($_POST['liam2_add_another_email'])) {
-        $email = htmlspecialchars($_POST['liam2_add_another_email']);
+    if (isset($_REQUEST['liam2_add_another_email'])) {
+        $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : $_GET['user_id'];
+        $email = htmlspecialchars($_REQUEST['liam2_add_another_email']);
         $result = api(json_encode(array(
                 "cmd" => "create",
                 "paramJS" => array(
@@ -45,11 +46,13 @@ if (!isset($_SESSION['user_id'])) {
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
             $msg = wordwrap($msg, 70);
-            if (mail($email, $subject, $msg)) {
+            /*if (mail($email, $subject, $msg)) {
                 $success = 'A verification link has been sent to your email address.';
             } else {
                 $error = "The email can't be send";
-            }
+            }*/
+            mail($email, $subject, $msg);
+            $success = 'A verification link has been sent to your email address.';
         } else {
             $error = $result[0]['message'];
         }
@@ -60,11 +63,15 @@ if (!isset($_SESSION['user_id'])) {
                 "paramJS" => array(
                     "table" => "liam2_User_email",
                     "row" => [
-                        "liam2_User_id_fk_164887" => $_SESSION['user_id'],
+                        "liam2_User_id_fk_164887" => $user_id,
                         "liam2_email_id_fk_396224" => $email_id
                     ]
                 )
             )));
+        }
+        if (isset($_GET['liam2_add_another_email'])) {
+            header("Location: http:" . $_GET['origin']);
+            exit();
         }
     }
     if (isset($_POST['liam2_verify_email'])) {
@@ -113,11 +120,13 @@ if (!isset($_SESSION['user_id'])) {
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
             $msg = wordwrap($msg, 70);
-            if (mail($email, $subject, $msg)) {
+            mail($email, $subject, $msg);
+            $success = 'A verification link has been sent to your email address.';
+            /*if (mail($email, $subject, $msg)) {
                 $success = 'A verification link has been sent to your email address.';
             } else {
                 $error = "The email can't be send";
-            }
+            }*/
         } else {
             $error = $result[0]['message'];
         }

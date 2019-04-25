@@ -4,14 +4,22 @@ require_once(__DIR__ . '/inc/captcha/captcha.inc.php');
 require_once(__DIR__ . '/inc/LIAM2_Client_translate.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
-if (isset($_POST['self_register'])) {
-    if (file_exists($_POST['captcha-image'])) unlink($_POST['captcha-image']);
-    $sentCode = htmlspecialchars($_POST['code']);
-    $result = (int)$_POST['result'];
-    if (getExpressionResult($sentCode) !== $result) {
+if (isset($_POST['self_register']) || isset($_GET['origin'])) {
+    if (!isset($_GET['origin'])) {
+        if (file_exists($_POST['captcha-image'])) unlink($_POST['captcha-image']);
+        $sentCode = htmlspecialchars($_POST['code']);
+        $result = (int)$_POST['result'];
+        $captchaResult = getExpressionResult($sentCode) !== $result;
+    } else {
+        $captchaResult = true;
+    }
+    if (!$captchaResult) {
         $error = 'Wrong Captcha.';
     } else {
-        $email = htmlspecialchars($_POST['email']);
+        $email = htmlspecialchars($_REQUEST['email']);
+        $origin = isset($_GET['origin']) ? htmlspecialchars($_GET['origin']) : '';
+        $firstname = isset($_GET['firstname']) ? htmlspecialchars($_GET['firstname']) : '';
+        $lastname = isset($_GET['lastname']) ? htmlspecialchars($_GET['lastname']) : '';
         $result = api(json_encode(array(
                 "cmd" => "create",
                 "paramJS" => array(
@@ -43,16 +51,20 @@ if (isset($_POST['self_register'])) {
 
             // Mail Content
             $subject = "Please confirm your Mail Adress";
-            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_register.php?token=" . $jwt;
+            $user_info = '&firstname=' . $firstname . '&lastname=' . $lastname;
+            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_register.php?token=" . $jwt . '&origin=' . $origin . $user_info;
             $msg = translate('LIAM2 CLIENT Self registration email', 'en');
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
             $msg = wordwrap($msg, 70);
-            if (mail($email, $subject, $msg)) {
+            /*if (mail($email, $subject, $msg)) {
                 $success = 'A verification link has been sent to your email address.';
             } else {
                 $error = "The email can't be send";
-            }
+            }*/
+            mail($email, $subject, $msg);
+            var_dump($msg);
+            $success = 'A verification link has been sent to your email address.';
         } else {
             $error = $result[0]['message'];
         }

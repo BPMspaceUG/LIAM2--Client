@@ -135,7 +135,7 @@ if (isset($_POST['liam2_login'])) {
                         )
                     ));
                 } else {
-                    $_SESSION['user_id'] = $user_id;
+                    //$_SESSION['user_id'] = $user_id;
                     $login_attempt_info = 'Successful - ' . $email_input;
                     $result = api(json_encode(array(
                             "cmd" => "create",
@@ -160,6 +160,8 @@ if (isset($_POST['liam2_login'])) {
                         $token = JWT::encode($jwt_token, AUTH_KEY);
                         header("Location: http:" . $origin . "?token=" . $token);
                         exit();
+                    } else {
+                        $_SESSION['user_id'] = $user_id;
                     }
                 }
             }

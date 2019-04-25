@@ -13,11 +13,19 @@
                     <form method="post" action="" class="needs-validation">
                         <div class="form-group row">
                             <label for="firstname" class="col-lg-4 col-sm-6">Firstname *</label>
-                            <input type="text" id="firstname" name="firstname" class="form-control col-lg-8" required/>
+                            <?php if (isset($_GET['firstname']) && $_GET['firstname']) : ?>
+                                <input type="text" id="firstname" name="firstname" class="form-control col-lg-8" value="<?php echo $_GET['firstname'];?>" required readonly/>
+                            <?php else : ?>
+                                <input type="text" id="firstname" name="firstname" class="form-control col-lg-8" required/>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group row">
                             <label for="lastname" class="col-lg-4 col-sm-6">Lastname *</label>
+                        <?php if (isset($_GET['lastname']) && $_GET['lastname']) : ?>
+                            <input type="text" id="lastname" name="lastname" class="form-control col-lg-8" value="<?php echo $_GET['lastname'];?>" required readonly/>
+                        <?php else : ?>
                             <input type="text" id="lastname" name="lastname" class="form-control col-lg-8" required/>
+                        <?php endif; ?>
                         </div>
                         <div class="form-group row">
                             <label for="password" class="col-lg-4 col-sm-6">Password *</label>
