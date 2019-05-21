@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header_session.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/BeforeValidException.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/ExpiredException.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/SignatureInvalidException.inc.php');
@@ -49,4 +49,5 @@ if (!isset($_GET['token'])) {
         }
     }
 }
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/templates/LIAM2_Client_verify.inc.php');

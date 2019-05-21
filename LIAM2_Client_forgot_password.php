@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header_session.inc.php');
 require_once(__DIR__ . '/inc/LIAM2_Client_translate.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
@@ -75,4 +75,5 @@ if (isset($_POST['forgot_password'])) {
         }
     }
 }
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/templates/LIAM2_Client_forgot_password.inc.php');

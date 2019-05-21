@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
+require_once(__DIR__ . '/inc/LIAM2_Client_header_session.inc.php');
 require_once(__DIR__ . '/inc/captcha/captcha.inc.php');
 require_once(__DIR__ . '/inc/LIAM2_Client_translate.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
@@ -71,4 +71,5 @@ if (isset($_POST['self_register']) || isset($_GET['origin'])) {
     }
 }
 generateImage($expression->n1.' + '.$expression->n2.' =', $captchaImage);
+require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/templates/LIAM2_Client_self_register.inc.php');
