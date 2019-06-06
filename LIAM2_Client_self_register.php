@@ -9,7 +9,7 @@ if (isset($_POST['self_register']) || isset($_GET['origin'])) {
         if (file_exists($_POST['captcha-image'])) unlink($_POST['captcha-image']);
         $sentCode = htmlspecialchars($_POST['code']);
         $result = (int)$_POST['result'];
-        $captchaResult = getExpressionResult($sentCode) !== $result;
+        $captchaResult = getExpressionResult($sentCode) === $result;
     } else {
         $captchaResult = true;
     }
