@@ -52,7 +52,13 @@ if (isset($_POST['self_register']) || isset($_GET['origin'])) {
             // Mail Content
             $subject = "Please confirm your Mail Adress";
             $user_info = '&firstname=' . $firstname . '&lastname=' . $lastname;
-            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_register.php?token=" . $jwt . '&origin=' . $origin . $user_info;
+            $excluded_ports = array(80, 443);
+            if (in_array($_SERVER['SERVER_PORT'], $excluded_ports)) {
+                $server_port = '';
+            } else {
+                $server_port = ':' . $_SERVER['SERVER_PORT'];
+            }
+            $link = "http://" . $_SERVER['SERVER_NAME'] . $server_port . "/LIAM2_Client_register.php?token=" . $jwt . '&origin=' . $origin . $user_info;
             $msg = translate('LIAM2 CLIENT Self registration email', 'en');
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
