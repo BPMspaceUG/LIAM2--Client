@@ -63,7 +63,6 @@ if (isset($_POST['self_register']) || isset($_GET['origin'])) {
                 $error = "The email can't be send";
             }*/
             mail($email, $subject, $msg);
-            var_dump($msg);
             $success = 'A verification link has been sent to your email address.';
         } else {
             $error = $result[0]['message'];
