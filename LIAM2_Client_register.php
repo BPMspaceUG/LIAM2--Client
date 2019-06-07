@@ -64,7 +64,7 @@ if (!isset($_GET['token'])) {
             if (!isset($error)) {
                 if ($result && count($result) > 2) {
                     $show_form = true;
-                    if (isset($_GET['origin'])) {
+                    if (isset($_GET['origin']) && $_GET['origin']) {
                         header('Location: http:' . $_GET['origin']);
                         exit();
                     }
