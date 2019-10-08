@@ -1,6 +1,6 @@
 {
 	"LIAM2 CLIENT Self registration email": {
-		"en": {"name": "English", "text": "Hello, First line of text \n Second line of text <a href=$link>Click here to confirm your email</a>"},
+		"en": {"name": "English", "text": "Hello, First line of text \n Second line of textaa <a href=$link>Click here to confirm your email</a>"},
 		"de": {"name": "Deutsch", "text": "Hello, First line of text \n Second line of text <a href=$link>Click here to confirm your email</a>"}
 	},
 	"LIAM2 CLIENT verify email": {
