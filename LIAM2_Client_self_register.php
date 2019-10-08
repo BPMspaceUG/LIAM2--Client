@@ -58,7 +58,7 @@ if (isset($_POST['self_register']) || isset($_GET['origin'])) {
             } else {
                 $server_port = ':' . $_SERVER['SERVER_PORT'];
             }
-            $link = "http://" . $_SERVER['SERVER_NAME'] . $server_port . "/LIAM2_Client_register.php?token=" . $jwt . '&origin=' . $origin . $user_info;
+            $link = "http://" . $_SERVER['SERVER_NAME'] . $server_port . "/LIAM2_Client_register.php?token=" . $jwt . "&origin=" . $origin . $user_info;
             $msg = translate('LIAM2 CLIENT Self registration email', 'en');
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
