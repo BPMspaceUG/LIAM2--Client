@@ -1,5 +1,4 @@
 <?php
-mail('bobanilievski88@gmail.com', 'subject', 'message');exit();
 require_once(__DIR__ . '/inc/LIAM2_Client_header_session.inc.php');
 if (!isset($_SESSION['user_id'])) {
     header("Location: LIAM2_Client_login.php");
