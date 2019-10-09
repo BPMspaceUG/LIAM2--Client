@@ -60,7 +60,13 @@ if (isset($_POST['forgot_password'])) {
         if ($result > 2) {
             // Mail Content
             $subject = "Password Reset";
-            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_reset_password.php?token=" . $jwt;
+            $excluded_ports = array(80, 443);
+            if (in_array($_SERVER['SERVER_PORT'], $excluded_ports)) {
+                $server_port = '';
+            } else {
+                $server_port = ':' . $_SERVER['SERVER_PORT'];
+            }
+            $link = "http://" . $_SERVER['SERVER_NAME'] . $server_port . "/LIAM2_Client_reset_password.php?token=" . $jwt;
             $msg = translate('LIAM2 CLIENT password reset email', 'en');
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
