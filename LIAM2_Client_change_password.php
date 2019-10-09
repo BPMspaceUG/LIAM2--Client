@@ -29,10 +29,10 @@ if (!isset($_SESSION['user_id'])) {
             )
         )));
         $result = json_decode($result, true);
-        if (count($result) > 2 && $result[0]['change_password']) {
+        if (count($result) > 2 && $result[1]['change_password']) {
             $success = 'Password changed succesfully';
         } else {
-            $error = $result[0]['message'];
+            $error = $result[1]['message'];
         }
     }
     require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
