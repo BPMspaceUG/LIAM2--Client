@@ -10,7 +10,7 @@
         2. $url = "[ENTER URL HERE]";
         3. define('AUTH_KEY', 'liam2_key');
      
-## Important notes
+## Important notes for Sub-Systems
 The entry-URL to Authenticate is https://URL-TO-LIAM2-Client/LIAM2_Client_login.php
 This is important and has to be defined in every Sub-System.
 For Example in the project SQMS, the config should look like this:
