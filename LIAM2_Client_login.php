@@ -158,7 +158,7 @@ if (isset($_POST['liam2_login'])) {
                             "exp" => time() + 86400
                         );
                         $token = JWT::encode($jwt_token, AUTH_KEY);
-                        header("Location: http:" . $origin . "?token=" . $token);
+                        header("Location: " . $origin . "?token=" . $token);
                         exit();
                     } else {
                         $_SESSION['user_id'] = $user_id;
