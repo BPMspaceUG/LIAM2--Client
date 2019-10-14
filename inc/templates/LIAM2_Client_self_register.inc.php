@@ -18,7 +18,7 @@
                         <input type="hidden" name="captcha-image" value="<?php echo $captchaImage; ?>" />
                         <label for="result" class="col-lg-4">Captcha</label>
                         <img src="<?php echo $captchaImage; ?>" class="captcha-image col-lg-4 col-sm-4" />
-                        <input type="text" name="result" class="form-control col-lg-4 col-sm-8" required />
+                        <input type="text" name="result" class="form-control col-lg-4 col-sm-8" autocomplete="off" required />
                     </div>
                     <input type="submit" value="OK" class="form-submit btn btn-primary" name="self_register" />
                 </form>
