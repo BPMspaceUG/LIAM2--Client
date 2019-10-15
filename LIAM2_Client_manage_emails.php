@@ -39,9 +39,14 @@ if (!isset($_SESSION['user_id']) && !isset($_GET['liam2_add_another_email'])) {
              * for a list of spec-compliant algorithms.
              */
             $jwt = JWT::encode($jwt_token, $jwt_key);
-
             $subject = "Verification";
-            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_verify.php?token=" . $jwt;
+            $excluded_ports = array(80, 443);
+            if (in_array($_SERVER['SERVER_PORT'], $excluded_ports)) {
+                $server_port = '';
+            } else {
+                $server_port = ':' . $_SERVER['SERVER_PORT'];
+            }
+            $link = "http://" . $_SERVER['SERVER_NAME'] . $server_port . "/LIAM2_Client_verify.php?token=" . $jwt;
             $msg = translate('LIAM2 CLIENT verify email', 'en');
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
@@ -115,7 +120,13 @@ if (!isset($_SESSION['user_id']) && !isset($_GET['liam2_add_another_email'])) {
             $jwt = JWT::encode($jwt_token, $jwt_key);
 
             $subject = "Verification";
-            $link = "//" . $_SERVER['SERVER_NAME'] . "/LIAM2_Client_verify.php?token=" . $jwt;
+            $excluded_ports = array(80, 443);
+            if (in_array($_SERVER['SERVER_PORT'], $excluded_ports)) {
+                $server_port = '';
+            } else {
+                $server_port = ':' . $_SERVER['SERVER_PORT'];
+            }
+            $link = "http://" . $_SERVER['SERVER_NAME'] . $server_port . "/LIAM2_Client_verify.php?token=" . $jwt;
             $msg = translate('LIAM2 CLIENT verify email', 'en');
             $msg = str_replace('$link', $link, $msg);
             // Format and Send Mail
@@ -173,6 +184,18 @@ if (!isset($_SESSION['user_id']) && !isset($_GET['liam2_add_another_email'])) {
             )
         )));
         $result = json_decode($result, true);
+        if (!$result) {
+            $result = api(json_encode(array(
+                "cmd" => "makeTransition",
+                "paramJS" => array(
+                    "table" => "liam2_User_email",
+                    "row" => [
+                        "liam2_User_email_id" => $user_email_id,
+                        "state_id" => 11
+                    ]
+                )
+            )));
+        }
         if (!$result) $error = 'Wrong email';
         if (!isset($error)) {
             $result = api(json_encode(array(

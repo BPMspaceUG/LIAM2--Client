@@ -6,6 +6,10 @@
             <?php endif; ?>
             <?php if (isset($success)) : ?>
                 <div class="alert alert-success" role="alert"><?php echo $success; ?></div>
+                <div class="row">
+                    <a class="form-submit btn btn-primary" href="LIAM2_Client_login.php">Log In</a>
+                    <a class="form-submit btn btn-primary" href="#">Resend Email</a>
+                </div>
             <?php else : ?>
                 <h2>Register</h2>
                 <form method="post" action="" class="needs-validation">
