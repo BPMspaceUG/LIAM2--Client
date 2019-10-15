@@ -103,6 +103,14 @@ if (!isset($_GET['token'])) {
         }*/
     }
     if (isset($_GET['firstname']) || isset($_GET['lastname'])) $show_form = true;
+    if (!isset($_POST['register'])) {
+        $check_email = json_decode(api(json_encode(array("cmd" => "read", "paramJS" => array("table" => "liam2_email",
+            "where" => "liam2_email_id = $email_id && a.state_id != 13")))), true);
+        if ($check_email) {
+            $show_form = false;
+            $error = 'This email is already verified or blocked.';
+        }
+    }
 }
 require_once(__DIR__ . '/inc/LIAM2_Client_header.inc.php');
 require_once(__DIR__ . '/inc/templates/LIAM2_Client_register.inc.php');
