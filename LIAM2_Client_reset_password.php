@@ -30,6 +30,18 @@ if (!isset($_GET['token'])) {
         $show_form = false;
     } else {
         $user_id = $decoded->aud;
+        $result = json_decode(api(json_encode(array(
+            "cmd" => "read",
+            "paramJS" => array(
+                "table" => "liam2_User",
+                "where" => "liam2_User_id = $user_id && a.state_id = 8"
+            )
+        ))), true);
+        if ($result) {
+            $error = "This link was already used. If you need to reset your passwort again, please click on the button \"Forgot passwort\" in the LogIn form.";
+            $show_form = false;
+            $show_login_button = true;
+        }
         if (isset($_POST['liam2_reset_password'])) {
             $result = api(json_encode(array(
                 "cmd" => "makeTransition",
@@ -48,6 +60,7 @@ if (!isset($_GET['token'])) {
             if (count($result) > 2) {
                 $success = $result[0]['message'];
                 $show_form = false;
+                $show_login_button = true;
             } else {
                 $error = $result[0]['message'];
             }
