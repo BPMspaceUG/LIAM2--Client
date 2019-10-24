@@ -3,9 +3,10 @@ require_once(__DIR__ . '/inc/LIAM2_Client_header_session.inc.php');
 require_once(__DIR__ . '/inc/LIAM2_Client_translate.inc.php');
 require_once(__DIR__ . '/inc/php-jwt-master/src/JWT.inc.php');
 use \Firebase\JWT\JWT;
+$show_form = true;
 
-if (isset($_POST['forgot_password'])) {
-    $email_input = htmlspecialchars($_POST['email']);
+if (isset($_POST['forgot_password']) || isset($_GET['email'])) {
+    $email_input = htmlspecialchars($_REQUEST['email']);
     $user_email = json_decode(api(json_encode(array(
         "cmd" => "read",
         "paramJS" => array(
@@ -73,6 +74,7 @@ if (isset($_POST['forgot_password'])) {
             $msg = wordwrap($msg, 70);
             mail($email_input, $subject, $msg);
             $success = 'Password reset link is sent to this e-mail address.';
+            $show_form = false;
             /*if (mail($email_input, $subject, $msg)) {
                 $success = 'Password reset link sent to email.';
             } else {
