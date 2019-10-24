@@ -32,7 +32,7 @@ if (isset($_POST['liam2_login'])) {
             $email = json_decode(api(json_encode(array("cmd" => "read", "paramJS" => array("table" => "liam2_email",
                 "where" => "liam2_email_text = '$email_input'")))), true);
             if (!$email) {
-                $error = 'Wrong email';
+                $error = 'E-mail address is not recognized by the system, please enter the correct e-mail address or register.';
                 $login_attempt_info = 'Not Successful - ' . $email_input . ' - ' . $error;
                 $result = api(json_encode(array(
                         "cmd" => "create",
