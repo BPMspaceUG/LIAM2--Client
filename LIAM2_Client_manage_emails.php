@@ -170,6 +170,9 @@ if (!isset($_SESSION['user_id']) && !isset($_GET['liam2_add_another_email'])) {
         )));
         $success = 'Email successfully unselected.';
     }
+    if (isset($_POST['liam2_dont_unselect_email'])) {
+        $error = "Minimum one e-email address must be used.";
+    }
     if (isset($_POST['liam2_delete_email'])) {
         $email_id = htmlspecialchars($_POST['email']);
         $user_email_id = htmlspecialchars($_POST['delete_user_email_id']);

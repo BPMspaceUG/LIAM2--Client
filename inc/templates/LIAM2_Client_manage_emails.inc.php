@@ -34,17 +34,18 @@
 
                     <?php elseif ($user_email['state_id']['state_id'] == 11) : ?>
                         <div class="col-lg-6 manage-email-fields"><?php echo $email_text; ?></div>
-                        <?php if (count($selected_user_emails) > 1) : ?>
                             <div class="col-lg-3 manage-email-fields">
                                 <form method="post" action="" class="needs-validation">
                                     <input type="hidden" name="email" value="<?php echo $user_email['liam2_User_email_id']; ?>" />
-                                    <input type="submit" class="form-submit btn btn-primary" value="Do not use" name="liam2_unselect_email" />
+                                    <?php if (count($selected_user_emails) > 1) : ?>
+                                        <input type="submit" class="form-submit btn btn-primary" value="Do not use" name="liam2_unselect_email" data-toggle="tooltip" data-placement="top" title="Notifications and messages will not be sent to this e-mail address" />
+                                    <?php else : ?>
+                                        <input type="submit" class="form-submit btn btn-primary" value="Do not use" name="liam2_dont_unselect_email" data-toggle="tooltip" data-placement="top" title="Notifications and messages will not be sent to this e-mail address" />
+                                    <?php endif; ?>
                                 </form>
                             </div>
-                        <?php else : ?>
-                            <div class="col-lg-3 manage-email-fields"></div>
-                        <?php endif;
-                        if (count($selected_user_emails) > 1) : ?>
+                    <?php
+                        /*if (count($selected_user_emails) > 1) : ?>
                             <div class="col-lg-3 manage-email-fields">
                                 <form method="post" action="" class="needs-validation">
                                     <input type="hidden" name="email" value="<?php echo $email_id; ?>" />
@@ -52,13 +53,13 @@
                                     <input type="submit" class="form-submit btn btn-primary" value="Delete email" name="liam2_delete_email" />
                                 </form>
                             </div>
-                        <?php endif;
+                        <?php endif;*/
                     else : ?>
                         <div class="col-lg-6 manage-email-fields"><?php echo $email_text; ?></div>
                         <div class="col-lg-3 manage-email-fields">
                             <form method="post" action="" class="needs-validation">
                                 <input type="hidden" name="email" value="<?php echo $user_email['liam2_User_email_id']; ?>" />
-                                <input type="submit" class="form-submit btn btn-primary" value="Use" name="liam2_select_email" />
+                                <input type="submit" class="form-submit btn btn-primary" value="Use" name="liam2_select_email" data-toggle="tooltip" data-placement="top" title="Notifications and messages will be sent to this e-mail address" />
                             </form>
                         </div>
                         <?php if (count($selected_user_emails) > 1 || ($selected_user_emails && $unselected_user_emails)) : ?>
@@ -66,7 +67,7 @@
                                 <form method="post" action="" class="needs-validation">
                                     <input type="hidden" name="email" value="<?php echo $email_id; ?>">
                                     <input name="delete_user_email_id" type="hidden" value="<?php echo $user_email['liam2_User_email_id']; ?>" />
-                                    <input type="submit" class="form-submit btn btn-primary" value="Delete email" name="liam2_delete_email" />
+                                    <input type="submit" class="form-submit btn btn-primary liam2-delete-email" value="Delete email" name="liam2_delete_email" data-toggle="tooltip" data-placement="top" title="This e-mail address will be removed" />
                                 </form>
                             </div>
                         <?php endif;
