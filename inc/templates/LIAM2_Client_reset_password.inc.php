@@ -15,11 +15,21 @@
                 <form method="post" action="" class="needs-validation">
                     <div class="form-group row">
                         <label for="liam2_User_password_new" class="col-lg-4 col-sm-6">New password *</label>
-                        <input type="password" name="liam2_User_password_new" class="form-control col-lg-8" minlength="10" required />
+                        <div class="show-hide-password col-lg-8">
+                            <input type="password" name="liam2_User_password_new" class="form-control" minlength="10" required />
+                            <div class="input-group-addon">
+                                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="liam2_User_password_new_confirm" class="col-lg-4 col-sm-6">Confirm new password *</label>
-                        <input type="password" name="liam2_User_password_new_confirm" class="form-control col-lg-8" minlength="10" required />
+                        <div class="show-hide-password col-lg-8">
+                            <input type="password" name="liam2_User_password_new_confirm" class="form-control" minlength="10" required />
+                            <div class="input-group-addon">
+                                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <input type="submit" class="form-submit btn btn-primary" value="Reset Password" name="liam2_reset_password" />
                 </form>

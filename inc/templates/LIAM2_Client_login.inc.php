@@ -12,7 +12,12 @@
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-lg-4 col-sm-6">Password *</label>
-                    <input type="password" name="password" class="form-control col-lg-8" required />
+                    <div class="show-hide-password col-lg-8">
+                        <input type="password" name="password" class="form-control" required />
+                        <div class="input-group-addon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <input type="hidden" name="code" value="<?php echo $code; ?>" />

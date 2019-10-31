@@ -29,7 +29,12 @@
                         </div>
                         <div class="form-group row">
                             <label for="password" class="col-lg-4 col-sm-6">Password *</label>
-                            <input type="password" name="password" class="form-control col-lg-8 password" minlength="10" required/>
+                            <div class="show-hide-password col-lg-8">
+                                <input type="password" name="password" class="form-control password" minlength="10" required/>
+                                <div class="input-group-addon">
+                                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
                         </div>
                         <input type="submit" value="OK" class="form-submit btn btn-primary" name="register"/>
                     </form>
